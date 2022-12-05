@@ -29,7 +29,6 @@ class usersDaoMongoDb extends ContainerMongoDb {
         }
         try{
             const user = await this.coleccion.findOne({email: email});
-            console.log("🚀 ~ file: usersDAOmongo.js ~ line 32 ~ usersDaoMongoDb ~ listByEmail ~ user", user)
             
             if (user){
                 return {error: false, data: user};

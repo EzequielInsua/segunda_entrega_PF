@@ -64,7 +64,6 @@ userRouter.post('/login', jsonParser, async (req, res) => {
         const {error, data} = await usersDao.listByEmail(req.body.email)
         
         if (error) return res.render("main", {layout: 'error', msj: data})
-        console.log(isValidPassword(data, req.body.password))
         if (isValidPassword(data, req.body.password)) {
             req.session.username = req.body.email;
             req.session.jwt = generateToken(req.body.email)

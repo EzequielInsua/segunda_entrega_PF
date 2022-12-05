@@ -130,9 +130,6 @@
                     posts: [articlesSchema]
                 })
                 const desnormalize = await normalizr.denormalize(data.result, postSchema, data.entities)
-                console.log("🚀 Datos Normalizados: ", JSON.stringify(data).length)
-                console.log("🚀 Datos Desnormalizados", JSON.stringify(desnormalize).length)
-                console.log(`Se comprime: ${(1-(JSON.stringify(desnormalize).length/JSON.stringify(data).length))*100} % `)
                 
                 const html = desnormalize.posts.map( ({author,text}) => `<li class="clearfix">
                                                 <div class="message-data">

@@ -34,7 +34,7 @@ const chatSocket = () =>{
         });
     
         /* socket.on('new_product', async ( newProduct ) => {
-            console.log('producto recivido')
+            console.log('producto recibido')
             console.log('new_product',newProduct);
             await dbProducts.save(newProduct);
             const products = await dbProducts.getAll();

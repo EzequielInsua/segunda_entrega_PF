@@ -5,6 +5,8 @@ import MongoStore from "connect-mongo";
 
 import productosRouter from './routers/producto.router.js';
 import userRouter from './routers/user.router.js';
+import infoRouter from './routers/info.router.js';
+import apiRouter from './routers/api.router.js';
 // import carritosRouter from './routers/carrito.router.js';
 
 import handlebars from 'express-handlebars';
@@ -14,23 +16,36 @@ import { fileURLToPath } from 'url';
 import { Server as IOServer} from 'socket.io';
 import { Server as HttpServer } from 'http';
 
-import {messagesDao} from './daos/index.js';
+import { messagesDao } from './daos/index.js';
 import jwt from 'jsonwebtoken';
 
-const PORT = 8099
-const PRIVATE_KEY = 'M1Pr1m3rK3y'
+import dotenv from 'dotenv';
+import parseArgs from 'minimist'
+
+const options = {
+    default: {
+        port: 8080
+    },
+    alias: {
+        p: 'port'
+    }
+}
+const args = parseArgs(process.argv.slice(2), options);
+const { port:PORT } = args
+
+dotenv.config()
+
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 const app = express()
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
-
 
 const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
 const generateToken = (user) =>{
     return jwt.sign({data:user }, PRIVATE_KEY, {expiresIn: '10m'});
 }
-
 
 const isLogged = (req, res, next) => {
     jwt.verify(req.session.jwt, PRIVATE_KEY, (err) => {
@@ -45,9 +60,9 @@ const isLogged = (req, res, next) => {
 
 app.use(
     session({
-        secret: "32m32e90me2393",
+        secret: process.env.SECRET,
         store: MongoStore.create({
-            mongoUrl: "mongodb+srv://einsua91:0AsDIACXvDmHDQug@cluster0.j7gmil7.mongodb.net/test",
+            mongoUrl: process.env.MONGODB_URL,
             mongoOptions: advancedOptions,
         }),
         resave: false,
@@ -62,6 +77,8 @@ app.use(express.urlencoded( { extended: true } ));
 
 app.use('/productos', isLogged, productosRouter);
 app.use('/user', userRouter);
+app.use('/info', infoRouter);
+app.use('/api', apiRouter);
 // app.use('/carritos', carritosRouter)
 
 // Config del front
