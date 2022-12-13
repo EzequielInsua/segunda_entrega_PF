@@ -1,4 +1,5 @@
 import express from 'express';
+import { countCPUs } from '../app.js';
 
 const { Router } = express;
 const infoRouter = new Router();
@@ -13,6 +14,7 @@ infoRouter.get('/', (req, res) => {
         'Path executing': `${process.argv[1]}`,
         'PID': `${process.pid}`,
         'Foldername Project': `${process.cwd().split('\\')[10]}`,
+        'CPUs': `${countCPUs}`
     });
 });
 

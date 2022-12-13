@@ -1,6 +1,8 @@
 import express from 'express';
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import cluster from 'cluster';
+import { cpus } from 'os';
 // import passport from 'passport';
 
 import productosRouter from './routers/producto.router.js';
@@ -24,14 +26,21 @@ import parseArgs from 'minimist'
 
 const options = {
     default: {
-        port: 8080
+        port: 8080,
+        FORK: true,
+        CLUSTER: false,
     },
     alias: {
         p: 'port'
     }
 }
+
+export const countCPUs = cpus().length;
+
+
+
 const args = parseArgs(process.argv.slice(2), options);
-const { port:PORT } = args
+const { port:PORT, CLUSTER } = args
 
 dotenv.config()
 
@@ -110,9 +119,31 @@ app.engine(
 //------------------------------------------------------------------------
 // instancio servidor
 
-const server = httpServer.listen(PORT, () => {
-    console.log(`Servidor http escuchando en el puerto ${server.address().port}`)
-})
+let server;
+
+if (CLUSTER){
+    if (cluster.isPrimary){
+        
+        for (let i = 0; i < countCPUs; i++){
+            cluster.fork();
+        }
+
+        cluster.on('exit', (worker, code, signal) => {
+            console.log(`Worker ${worker.process.pid} exited with code ${code}`);
+            cluster.fork();
+        });
+
+    } else {
+        server = httpServer.listen(PORT, () => {
+            console.log(`Servidor http escuchando en el puerto ${server.address().port}. Modo CLUSTER.`)
+        })
+    }
+
+} else {
+    server = httpServer.listen(PORT, () => {
+        console.log(`Servidor http escuchando en el puerto ${server.address().port}. Modo FORK.`)
+    })
+}
 
 server.on('error', error => console.log(`Error en servidor ${error}`))
 
