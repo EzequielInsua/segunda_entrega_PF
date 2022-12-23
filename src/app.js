@@ -22,7 +22,10 @@ import { messagesDao } from './daos/index.js';
 import jwt from 'jsonwebtoken';
 
 import dotenv from 'dotenv';
-import parseArgs from 'minimist'
+import parseArgs from 'minimist';
+import compression from 'compression';
+import { logger, loggerWarn, loggerError } from '../config/config.js';
+
 
 const options = {
     default: {
@@ -34,6 +37,10 @@ const options = {
         p: 'port'
     }
 }
+
+
+
+
 
 export const countCPUs = cpus().length;
 
@@ -81,12 +88,14 @@ app.use(
 
 // app.use(passport.initialize());
 // app.use(passport.session());
+
 app.use(express.json());
 app.use(express.urlencoded( { extended: true } ));
 
 app.use('/productos', isLogged, productosRouter);
 app.use('/user', userRouter);
-app.use('/info', infoRouter);
+// app.use('/info', infoRouter); // 763B
+app.use('/info', compression(), infoRouter); // 787B
 app.use('/api', apiRouter);
 // app.use('/carritos', carritosRouter)
 
@@ -98,11 +107,22 @@ app.set("views", "./views");
 app.use(express.static(__dirname))
 app.set("view engine", "hbs");
 
+
+const logging = (req, res, next) => {
+    const {method, headers} = req
+    logger.info( method, headers.referer );
+    next();
+}
+
+app.use(logging);
+
 app.get('/', isLogged, (req, res) => {
     return res.render("index", {layout: 'main', username: req.session.username}); 
 });
 
 app.get('/*', (req, res) => {
+    const {method, headers} = req
+    loggerWarn.warn( method, headers.referer );
     res.redirect("/")
 });
 
@@ -145,7 +165,11 @@ if (CLUSTER){
     })
 }
 
-server.on('error', error => console.log(`Error en servidor ${error}`))
+
+
+server.on('error', error => loggerError.error(`Error en servidor ${error}`))
+
+                
 
 //--------------------------------------------
 // configuro el servidor

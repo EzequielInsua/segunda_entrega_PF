@@ -1,7 +1,7 @@
 import express from 'express'
 const { Router } = express
 import bodyParser from 'body-parser';
-
+import { loggerError } from '../../config/config.js';
 import { productosDao as productosApi } from '../daos/index.js'
 
 //--------------------------------------------
@@ -39,7 +39,8 @@ productosRouter.get('/', async (req, res) => {
             username: req.session.username
         })
     } catch(e){
-        console.log(e);
+        // console.log(e);
+        loggerError.error(e);
         res.send({
             data: e.message,
             error: true
@@ -57,7 +58,8 @@ productosRouter.get('/test', async (req, res) => {
             username: req.session.username
         })
     } catch(e){
-        console.log(e);
+        // console.log(e);
+        loggerError.error(e);
         res.send({
             data: e.message,
             error: true
@@ -75,6 +77,8 @@ productosRouter.get('/:id', async (req, res) => {
             error: false
         });
     } catch(e){
+        // console.log(e);
+        loggerError.error(e);
         res.send({
             data: e.message,
             error: true
@@ -88,7 +92,8 @@ productosRouter.post('/', jsonParser, async (req, res) => {
         await productosApi.save({ title, price, thumbnail });
         return res.redirect("/");
     } catch(e){
-        console.log(e);
+        // console.log(e);
+        loggerError.error(e);
         res.send({
             data: e.message,
             error: true
@@ -105,6 +110,8 @@ productosRouter.put('/:id', adminAuth(true), async (req, res) => {
             error: false
         });
     } catch(e){
+        // console.log(e);
+        loggerError.error(e);
         res.send({
             data: e.message,
             error: true
@@ -121,6 +128,8 @@ productosRouter.delete('/:id', adminAuth(true), async (req, res) => {
             error: false
         });
     } catch(e){
+        // console.log(e);
+        loggerError.error(e);
         res.send({
             data: e.message,
             error: true

@@ -3,19 +3,22 @@
   "name": "ecommerceback",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "0x src/app.js",
+    "test": "node src/test/benchmark.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.5",
+    "autocannon": "^7.10.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "bootswatch": "^5.2.2",
     "cluster": "^0.7.7",
+    "compression": "^1.7.4",
     "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -26,6 +29,7 @@
     "forever-monitor": "^3.0.3",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.10",
+    "log4js": "^6.7.1",
     "minimist": "^1.2.7",
     "mongodb": "^3.6.11",
     "mongoose": "^5.13.15",

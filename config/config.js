@@ -29,3 +29,19 @@ export default {
         }
     }
 }
+log4js.configure({
+    appenders: {
+        loggerConsole: { type: 'console' },
+        loggerWarningFile: { type: 'file', filename: 'warn.log' },
+        loggerErrorFile: { type: 'file', filename: 'error.log' }
+    },
+    categories: {
+        default: { appenders: ["loggerConsole"], level: 'trace' },
+        fileWarning: { appenders: ["loggerWarningFile"], level: 'warn'},
+        fileError: { appenders: ["loggerErrorFile"], level: 'error'}
+    }
+})
+
+export const logger = log4js.getLogger();
+export const loggerWarn = log4js.getLogger("fileWarning");
+export const loggerError = log4js.getLogger("fileError");
