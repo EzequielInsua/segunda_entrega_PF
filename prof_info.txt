@@ -1,0 +1,7 @@
+Error: command quick not found
+    at Config.runCommand (C:\Users\Cris\AppData\Roaming\npm\node_modules\artillery\node_modules\@oclif\config\lib\config.js:169:19)
+    at async Main.run (C:\Users\Cris\AppData\Roaming\npm\node_modules\artillery\node_modules\@oclif\command\lib\main.js:28:9)
+    at async Main._run (C:\Users\Cris\AppData\Roaming\npm\node_modules\artillery\node_modules\@oclif\command\lib\command.js:43:20)
+    at async main (C:\Users\Cris\AppData\Roaming\npm\node_modules\artillery\bin\run:34:15)
+undefined
+command quick not found
