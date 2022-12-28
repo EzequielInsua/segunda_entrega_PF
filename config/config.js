@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import log4js from 'log4js';
 dotenv.config();
 
 export default {
