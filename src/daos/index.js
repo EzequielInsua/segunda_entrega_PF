@@ -24,7 +24,7 @@ switch (config.TypeDB) {
     case 'mongodb':
         const { default: ProductosDaoMongoDb } = await import('./productos/ProductosDaoMongoDb.js');
         const { default: CarritosDaoMongoDb } = await import('./carritos/CarritosDaoMongoDb.js');
-        const { default: messagesDAOMongo } = await import('./messages/messagesDaoMongo.js');
+        const { default: messagesDAOMongo } = await import('./messages/messagesDAOMongo.js');
         const { default: usersDaoMongoDb } = await import('./users/usersDaoMongo.js');
         
         productosDao = new ProductosDaoMongoDb();
