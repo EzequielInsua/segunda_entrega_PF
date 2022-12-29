@@ -38,16 +38,12 @@ const options = {
     }
 }
 
-
-
-
-
 export const countCPUs = cpus().length;
 
-
-
 const args = parseArgs(process.argv.slice(2), options);
-const { port:PORT, CLUSTER } = args
+const { port, CLUSTER } = args
+
+const PORT = process.env.PORT || port;
 
 dotenv.config()
 
