@@ -62,7 +62,7 @@ const generateToken = (user) =>{
 const isLogged = (req, res, next) => {
     jwt.verify(req.session.jwt, PRIVATE_KEY, (err) => {
         if (err) {
-            return res.render("main", {layout: 'error', msj: err})
+            return res.render("index", {layout: 'error', msj: err})
         }
         req.session.jwt = generateToken(req.session.username)
         next();
