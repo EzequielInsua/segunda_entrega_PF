@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 import config from '../../config/config.js'
 
+mongoose.set('strictQuery', false);
+
 const connectionInit = async () => {
     try{
         await mongoose.connect(config.mongodb.cnxStr, config.mongodb.options)
