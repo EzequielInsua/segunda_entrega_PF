@@ -241,3 +241,11 @@
 [2022-12-29T21:19:44.326] [WARN] fileWarning - GET http://localhost:8080/productos
 [2022-12-29T21:19:54.409] [WARN] fileWarning - GET http://localhost:8080/
 [2022-12-29T21:19:54.938] [WARN] fileWarning - GET http://localhost:8080/
+[2022-12-29T21:35:03.845] [WARN] fileWarning - GET http://localhost:8080/
+[2022-12-29T21:35:05.982] [WARN] fileWarning - GET http://localhost:8080/user/login
+[2022-12-29T21:35:08.228] [WARN] fileWarning - GET http://localhost:8080/productos
+[2022-12-29T21:35:12.485] [WARN] fileWarning - GET http://localhost:8080/user/login
+[2022-12-29T21:35:15.468] [WARN] fileWarning - GET http://localhost:8080/productos
+[2022-12-29T21:35:16.623] [WARN] fileWarning - GET http://localhost:8080/productos
+[2022-12-29T21:35:24.772] [WARN] fileWarning - GET http://localhost:8080/
+[2022-12-29T21:35:24.937] [WARN] fileWarning - GET http://localhost:8080/
