@@ -11,9 +11,8 @@ const jsonParser = bodyParser.json();
 const PRIVATE_KEY = 'M1Pr1m3rK3y'
 
 const generateToken = (user) =>{
-    return jwt.sign({data:user }, PRIVATE_KEY, {expiresIn: '5s'});
+    return jwt.sign({data:user }, PRIVATE_KEY, {expiresIn: '4h'});
 }
-
 
 // * ----------------------------------------------------------------
 // * LOGIN

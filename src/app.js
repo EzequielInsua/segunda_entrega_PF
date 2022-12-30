@@ -57,7 +57,7 @@ const io = new IOServer(httpServer);
 const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
 const generateToken = (user) =>{
-    return jwt.sign({data:user }, PRIVATE_KEY, {expiresIn: '10m'});
+    return jwt.sign({data:user }, PRIVATE_KEY, {expiresIn: '4h'});
 }
 
 const isLogged = (req, res, next) => {
