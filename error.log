@@ -1,0 +1,4 @@
+[2022-12-29T09:42:33.703] [ERROR] fileError - Error en servidor Error: listen EACCES: permission denied 8080;
+[2022-12-29T09:43:10.008] [ERROR] fileError - Error en servidor Error: listen EACCES: permission denied 8080;
+[2022-12-29T09:44:44.036] [ERROR] fileError - Error en servidor Error: listen EACCES: permission denied 8080;
+[2022-12-29T09:46:06.527] [ERROR] fileError - Error en servidor Error: listen EACCES: permission denied 8080;

@@ -53,6 +53,7 @@ const app = express()
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
+
 const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
 const generateToken = (user) =>{
@@ -62,7 +63,7 @@ const generateToken = (user) =>{
 const isLogged = (req, res, next) => {
     jwt.verify(req.session.jwt, PRIVATE_KEY, (err) => {
         if (err) {
-            return res.render("index", {layout: 'error', msj: err})
+            return res.render("main", {layout: 'error', msj: err})
         }
         req.session.jwt = generateToken(req.session.username)
         next();
@@ -99,7 +100,7 @@ app.use('/api', apiRouter);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.set("views", "./views");
+// app.set("views", "./views");
 app.use(express.static(__dirname))
 app.set("view engine", "hbs");
 
